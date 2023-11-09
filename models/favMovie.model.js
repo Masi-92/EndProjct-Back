@@ -13,6 +13,9 @@ const schema = new Schema(
       required : true
     },
   },
+//Wenn Sie timestamps: true setzen
+//   createdAt: ein Datum, das angibt, wann dieses Dokument erstellt wurde
+// updatedAt: ein Datum, das angibt, wann dieses Dokument zuletzt aktualisiert wurde
   { timestamps: { updatedAt: false, createdAt: true } }
 );
 
