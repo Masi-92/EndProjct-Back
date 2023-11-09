@@ -21,11 +21,9 @@ export const addMovieToFavorite = async (req, res) => {
 };
 
 export const getFavMovies = async (req, res) => {
-  //1 list to get dass eine id wie die userId haben
-  //populate um mit hilfe vin id zu denm geeignte obj zu gehen
-
+  const userId = req.user.id;
   const favMovies = await FavMovieModel.find({ userId }).populate("movieId");
-  res.send(favMovies);
+  res.send(favMovies.map((item) => item.movieId));
 };
 
 export const deleteMovieFromFavorite = async (req, res) => {
