@@ -7,7 +7,7 @@ export const getAllMovie = async (req, res) => {
 
 export const deleteMovieFromMovies = async (req, res) => {
   const movieId = req.params.movie;
-
+//just one commit 
   try {
     const deletedMovie = await MovieModel.findByIdAndDelete(movieId);
 
