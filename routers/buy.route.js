@@ -7,6 +7,5 @@ const router = Router();
 
 router.get("/", auth, getBuyMovie);
 router.post("/:movie", auth, subBuy);
-router.delete("/:movie", auth, subBuy);
 
 export default router;

@@ -1,9 +1,10 @@
 import FavMovieModel from "../models/favMovie.model.js";
 
-export const addMovieToFavorite = async (req, res) => {
+export const toggleMovieLike = async (req, res) => {
   const movieId = req.params.movie;
+  const userId = req.user.id;
 
-  const movie = await FavMovieModel.findOne({ movieId });
+  const movie = await FavMovieModel.findOne({ movieId,userId });
   if (movie) {
     await FavMovieModel.findOneAndDelete({ movieId });
     return res.send({
@@ -14,24 +15,17 @@ export const addMovieToFavorite = async (req, res) => {
 
   const result = await FavMovieModel.create({
     movieId,
-    userId: req.user.id,
+    userId: userId,
   });
 
-  res.send({ message: "add to favorite", isAdded: true });
+  res.send({ message: "added to favorites", isAdded: true });
 };
-
+//find() weil mehr als eine ist
 export const getFavMovies = async (req, res) => {
   const userId = req.user.id;
+  //populate um von id zu  ganze obj(movieId) zu  kommen
+  //populate funkzonirt wie eine join()
   const favMovies = await FavMovieModel.find({ userId }).populate("movieId");
+  console.log(favMovies);
   res.send(favMovies.map((item) => item.movieId));
-};
-
-export const deleteMovieFromFavorite = async (req, res) => {
-  const movieId = req.params.movie;
-
-  const favMovie = await FavMovieModel.findOneAndDelete({ movieId });
-
-  if (!favMovie) return res.status(404).send({ message: "movie not found" });
-
-  res.send({ message: "movie removed from favorites" });
 };

@@ -2,17 +2,18 @@ import BuyMovieModel from "../models/buyMovie.model.js";
 
 export const subBuy = async (req, res) => {
   const movieId = req.params.movie;
+  const userId = req.user.id;
 
-  const movie = await BuyMovieModel.findOne({ movieId });
+  const movie = await BuyMovieModel.findOne({ movieId, userId });
   if (movie) {
     await BuyMovieModel.findOneAndDelete({ movieId });
     return res.send({
-      message: "movie removed from buyiiiing",
+      message: "movie removed from buy list",
       isAdded: false,
     });
   }
 
-  const result = await BuyMovieModel.create({
+  await BuyMovieModel.create({
     movieId,
     userId: req.user.id,
   });
@@ -24,14 +25,4 @@ export const getBuyMovie = async (req, res) => {
   const userId = req.user.id;
   const buyMovies = await BuyMovieModel.find({ userId }).populate("movieId");
   res.send(buyMovies.map((item) => item.movieId));
-};
-
-export const deleteMovieFromBuying = async (req, res) => {
-  const movieId = req.params.movie;
-
-  const buymovie = await BuyMovieModel.findOneAndDelete({ movieId });
-
-  if (!buymovie) return res.status(404).send({ message: "movie not found" });
-
-  res.send({ message: "movie removed from Buying " });
 };

@@ -1,25 +1,27 @@
-import UserModel from "../models/user.moel.js";
+import UserModel from "../models/user.model.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export async function login(req, res) {
   const { username, password } = req.body;
   if (!username || !password) {
-    return res.status(400).send("Missing username and/or password");
+    return res
+      .status(400)
+      .send({ message: "Missing username and/or password" });
   }
-  const user = await UserModel.findOne({username:username});
+  const user = await UserModel.findOne({ username: username });
 
   if (!user) {
-    return res.status(400).send("User does not exist");
+    return res.status(400).send({ message: "User does not exist" });
   }
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(400).send({ msg: "Invalid password" });
+    return res.status(400).send({ message: "Invalid password" });
   }
   const token = jwt.sign(
-    { id: user._id, user: username },
+    { id: user._id, user: username, role: user.role },
     process.env.JWT_SECRET,
-    { expiresIn: "1d" }
+    { expiresIn: "1h" }
   );
   res.send({ token });
 }
@@ -27,21 +29,26 @@ export async function login(req, res) {
 export async function register(req, res) {
   const { username, password, fullName, email } = req.body;
   if (!username || !password || !fullName) {
-    return res.status(400).send("Missing username and/or password");
+    return res
+      .status(400)
+      .send({ message: "Missing username and/or password" });
   }
-  const user = await UserModel.findOne({ $or:[{username},{email}] });
+  const user = await UserModel.findOne({ $or: [{ username }, { email }] });
 
   if (user) {
-    return res.status(400).send("Username already exists");
+    return res.status(400).send({ message: "Username already exists" });
   }
-  const hash = await bcrypt.hash(password, 10);
+  const hash = await bcrypt.hash(password, "1h");
 
   // oder : UserModel.create(body)
   await UserModel.create({
-    username: username,
-    email: email,
+    username,
+    email,
+    fullName,
     password: hash,
-    fullName: fullName,
   });
-  res.send({ msg: "Useeeeeer createeeeeeeeeeed" });
+  res.send({ message: "User created" });
 }
+
+//test
+

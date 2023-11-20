@@ -11,6 +11,6 @@ export const isAdmin = (req, res, next) => {
         req.user = decode;
         next();
     } catch (error) {
-        res.status(403).send({message: "access denid"});
+        res.status(403).send({message: "access denied"});
     }
 };
