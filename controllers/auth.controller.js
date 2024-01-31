@@ -1,4 +1,4 @@
-import UserModel from "../models/user.model.js"
+import UserModel from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -38,7 +38,7 @@ export async function register(req, res) {
   if (user) {
     return res.status(400).send({ message: "Username already exists" });
   }
-  const hash = await bcrypt.hash(password, "1h");
+  const hash = await bcrypt.hash(password, 10);  
 
   // oder : UserModel.create(body)
   await UserModel.create({

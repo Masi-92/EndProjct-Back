@@ -1,0 +1,68 @@
+.layout {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  height: 100vh;
+  background-color: white;
+  width: 100vw;
+  overflow-y: auto;
+  padding-top: 70px;
+
+  .header {
+    background: rgb(14, 13, 13);
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    left: 0;
+    top: 0;
+
+    ul {
+      display: flex;
+      list-style: none;
+
+      gap: 1rem;
+      color: rgb(255, 255, 255);
+      font-size: larger;
+
+      align-items: center;
+    }
+  }
+
+  .sidebar {
+    background-color: #34495e55;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  .active {
+    background: #84848555;
+    padding: 0.5rem;
+    border: 1px solid #ff0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.1rem;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  .logOout {
+    position: absolute;
+    justify-content: right;
+    align-items: right;
+    right: 1rem;
+    top: 1rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+
+    .logOoutButoon {
+      background-color: #84848555;
+      color: #ff0;
+      padding: 0.5rem;
+      border-radius: 50%;
+      display: flex;
+      cursor: pointer;
+    }
+  }
+
+  .main {
+    overflow-x: hidden;
+  }
+}
