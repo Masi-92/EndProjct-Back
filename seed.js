@@ -114,6 +114,8 @@ async function seedData() {
       actors.push(faker.person.fullName());
     }
 
+    
+
     return actors;
   }
 // entweder wird alls gepusht oder mit dem async  
