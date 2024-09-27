@@ -38,7 +38,11 @@ export async function register(req, res) {
   if (user) {
     return res.status(400).send({ message: "Username already exists" });
   }
+<<<<<<< HEAD
+  const hash = await bcrypt.hash(password, 10);
+=======
   const hash = await bcrypt.hash(password, 10);  
+>>>>>>> 5fc36d26af7f49c8c9d8311efd15ebcd741f3a49
 
   // oder : UserModel.create(body)
   await UserModel.create({
