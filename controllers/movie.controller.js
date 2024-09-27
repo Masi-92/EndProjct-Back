@@ -11,7 +11,7 @@ export const getAllMovie = async (req, res) => {
     // .skip((page - 1) * pageSize);
   res.send(movies);
 };
-
+//delete if movie with this movieId da ist 
 export const deleteMovieFromMovies = async (req, res) => {
   const movieId = req.params.movie;
 
@@ -30,7 +30,7 @@ export const deleteMovieFromMovies = async (req, res) => {
     res.status(500).send({ message: "Etwas ist schief gelaufen" });
   }
 };
-
+// editMovie 
 export async function editMovie(req, res) {
   console.log(req.body);
 

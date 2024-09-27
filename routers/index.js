@@ -5,7 +5,7 @@ import favMovieRoute from "./fav.route.js";
 import buymovieRoute from "./buy.route.js";
 
 
-// hier wird  allle Routs importirt um sever frier zu haben 
+// hier wird  alle Routs importirt um sever frier zu haben 
 
 const router = Router();
 
