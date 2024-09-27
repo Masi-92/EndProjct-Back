@@ -120,7 +120,7 @@ async function seedData() {
   }
 // entweder wird alls gepusht oder mit dem async  
 
-  // const movies = [];
+   //const movies = [];
   for (let index = 0; index < count; index++) {
     const movie = {
       name: faker.lorem.words(random(1, 3)),
@@ -135,7 +135,7 @@ async function seedData() {
       IMDB: random(0, 10),
     };
     await MovieModel.create(movie);
-    //   movies.push(movie);
+     //movies.push(movie);
   }
 
   console.log(count + " movies added");
